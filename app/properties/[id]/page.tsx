@@ -1,9 +1,15 @@
+"use client";
+
+import { useParams } from "next/navigation";
+
 function PropertyPage() {
-  return (
-    <div>
-      Propery Page
-    </div>
-  )
+	const { id } = useParams();
+
+	return (
+		<div>
+			Propery Page <span>{id}</span>
+		</div>
+	);
 }
 
-export default PropertyPage
+export default PropertyPage;
