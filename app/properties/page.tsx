@@ -1,9 +1,45 @@
 import PropertyCard from "@/components/PropertyCard";
-import properties from "@/properties.json";
+import { fetchProperties } from "@/utils/requests";
 
-export type Property = (typeof properties)[0];
+export type Property = {
+	_id: string;
+	createdAt: string;
+	updatedAt: string;
+	name: string;
+	type: string;
+	description?: string;
+	location: {
+		street?: string;
+		city?: string;
+		state: string;
+		zipcode?: string;
+	};
+	beds: number;
+	baths: number;
+	square_feet: number;
+	amenities: string[];
+	rates: {
+		nightly?: number;
+		weekly?: number;
+		monthly?: number;
+	};
+	seller_info: {
+		name?: string;
+		email?: string;
+		phone?: string;
+	};
+	images: string[];
+	is_featured?: boolean;
+};
 
-function PropertiesPage() {
+async function PropertiesPage() {
+	const properties: Property[] = await fetchProperties();
+
+	// Sort properties by date
+	properties.sort(
+		(a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+	);
+
 	return (
 		<section className="px-4 py-6">
 			<div className="container-xl lg:container m-auto px-4 py-6">
