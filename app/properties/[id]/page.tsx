@@ -1,6 +1,4 @@
 "use client";
-
-"use client";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -10,6 +8,7 @@ import { fetchProperty } from "@/utils/requests";
 import { type Property } from "../page";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
 import PropertyDetails from "@/components/PropertyDetails";
+import Spinner from "@/components/Spinner";
 
 function PropertyPage() {
 	const { id } = useParams();
@@ -44,6 +43,7 @@ function PropertyPage() {
 
 	return (
 		<>
+      {loading && <Spinner loading={loading} />}
 			{!loading && property && (
 				<>
 					<PropertyHeaderImage image={property.images[0]} />
