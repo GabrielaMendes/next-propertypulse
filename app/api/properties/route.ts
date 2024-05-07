@@ -1,4 +1,5 @@
 import { type NextApiRequest } from "next";
+import { NextResponse } from "next/server";
 
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
@@ -10,9 +11,9 @@ export async function GET(request: NextApiRequest) {
 
 		const properties = await Property.find({});
 
-		return new Response(JSON.stringify(properties), { status: 200 });
+		return new NextResponse(JSON.stringify(properties), { status: 200 });
 	} catch (error) {
 		console.log(error);
-		return new Response("Sometrhing went wrong", { status: 500 });
+		return new NextResponse("Sometrhing went wrong", { status: 500 });
 	}
 }
